@@ -160,7 +160,7 @@ const Home = () => {
 
   return (
     <div className="min-h-screen bg-[#030014] overflow-hidden" id="Home">
-      <div className="max-w-8xl mx-auto px-6 md:px-16 lg:px-24">
+      <div className="max-w-7.3xl mx-auto px-4 sm:px-6 md:px-8 lg:px-16">
         <div className={`relative z-10 transition-all duration-1000 ${isLoaded ? "opacity-100" : "opacity-0"}`}>
           <div className="container mx-auto px-[5%] sm:px-6 lg:px-[0%] min-h-screen">
             <div className="flex flex-col lg:flex-row items-center justify-center h-screen md:justify-between gap-0 sm:gap-12 lg:gap-20">
