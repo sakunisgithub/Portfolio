@@ -108,6 +108,7 @@ const techStacks = [
   { icon: "Python.svg", language: "Python" },
   { icon: "NumPy.svg", language: "NumPy" },
   { icon: "Pandas.svg", language: "Pandas" },
+  { icon: "scikit-learn.svg", language: "Scikit-learn"},
   { icon: "TensorFlow.svg", language: "TensorFlow" },
   { icon: "PyTorch.svg", language: "PyTorch" },
   { icon: "Matplotlib.svg", language: "Matplotlib" },
