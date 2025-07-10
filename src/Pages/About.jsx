@@ -217,6 +217,28 @@ const AboutPage = () => {
               Data Science and Machine Learning enthusiast with a strong foundation in Statistics, Machine Learning, and Deep Learning. Experienced in data pre-processing, model building, and visualization using Python and R. Passionate about extracting actionable insights from data to drive informed decision making.
             </p>
 
+               {/* Quote Section */}
+      <div 
+        className="relative bg-gradient-to-br from-[#6366f1]/5 via-transparent to-[#a855f7]/5 border border-gradient-to-r border-[#6366f1]/30 rounded-2xl p-4 my-6 backdrop-blur-md shadow-2xl overflow-hidden"
+        data-aos="fade-up"
+        data-aos-duration="1700"
+      >
+        {/* Floating orbs background */}
+        <div className="absolute top-2 right-4 w-16 h-16 bg-gradient-to-r from-[#6366f1]/20 to-[#a855f7]/20 rounded-full blur-xl"></div>
+        <div className="absolute -bottom-4 -left-2 w-12 h-12 bg-gradient-to-r from-[#a855f7]/20 to-[#6366f1]/20 rounded-full blur-lg"></div>
+        
+        {/* Quote icon */}
+        <div className="absolute top-3 left-4 text-[#6366f1] opacity-30">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h4v10h-10z"/>
+          </svg>
+        </div>
+        
+        <blockquote className="text-gray-300 text-center lg:text-left italic font-large text-sm relative z-10 pl-6">
+          "Focus on the process. Control the controllables."
+        </blockquote>
+      </div>
+
             <div className="flex flex-col lg:flex-row items-center lg:items-start gap-4 lg:gap-4 lg:px-0 w-full">
               <a 
                 href="https://drive.google.com/file/d/1Mwo3_mi_E5-cHwSXaZ51Y3kR52KcZqoL/view?usp=sharing"
