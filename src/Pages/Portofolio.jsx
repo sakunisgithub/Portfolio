@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useCallback } from "react";
-import { db, collection } from "../firebase";
-import { getDocs } from "firebase/firestore";
+import { supabase } from "../supabase"; 
 import PropTypes from "prop-types";
 import SwipeableViews from "react-swipeable-views";
 import { useTheme } from "@mui/material/styles";
@@ -80,7 +79,7 @@ function TabPanel({ children, value, index, ...other }) {
     >
       {value === index && (
         <Box sx={{ p: { xs: 1, sm: 3 } }}>
-          <Typography>{children}</Typography>
+          <Typography component="div">{children}</Typography>
         </Box>
       )}
     </div>
@@ -157,21 +156,18 @@ export default function FullWidthTabs() {
 
   const fetchData = useCallback(async () => {
     try {
-      const projectCollection = collection(db, "projects");
-      const certificateCollection = collection(db, "certificates");
-
-      const [projectSnapshot, certificateSnapshot] = await Promise.all([
-        getDocs(projectCollection),
-        getDocs(certificateCollection),
+      const [projectsResponse, certificatesResponse] = await Promise.all([
+        supabase.from("projects").select("*").order('id', { ascending: true }),
+        supabase.from("certificates").select("*").order('id', { ascending: true }),
       ]);
 
-      const projectData = projectSnapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-        TechStack: doc.data().TechStack || [],
-      }));
 
-      const certificateData = certificateSnapshot.docs.map((doc) => doc.data());
+      if (projectsResponse.error) throw projectsResponse.error;
+      if (certificatesResponse.error) throw certificatesResponse.error;
+
+
+      const projectData = projectsResponse.data || [];
+      const certificateData = certificatesResponse.data || [];
 
       setProjects(projectData);
       setCertificates(certificateData);
@@ -180,11 +176,19 @@ export default function FullWidthTabs() {
       localStorage.setItem("projects", JSON.stringify(projectData));
       localStorage.setItem("certificates", JSON.stringify(certificateData));
     } catch (error) {
-      console.error("Error fetching data:", error);
+      console.error("Error fetching data from Supabase:", error.message);
     }
   }, []);
 
   useEffect(() => {
+    const cachedProjects = localStorage.getItem('projects');
+    const cachedCertificates = localStorage.getItem('certificates');
+
+    if (cachedProjects && cachedCertificates) {
+        setProjects(JSON.parse(cachedProjects));
+        setCertificates(JSON.parse(cachedCertificates));
+    }
+    
     fetchData();
   }, [fetchData]);
 
@@ -352,7 +356,7 @@ export default function FullWidthTabs() {
               <div className="grid grid-cols-1 md:grid-cols-3 md:gap-5 gap-4">
                 {displayedCertificates.map((certificate, index) => (
                   <div
-                    key={index}
+                    key={certificate.id || index}
                     data-aos={index % 3 === 0 ? "fade-up-right" : index % 3 === 1 ? "fade-up" : "fade-up-left"}
                     data-aos-duration={index % 3 === 0 ? "1000" : index % 3 === 1 ? "1200" : "1000"}
                   >
